@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f5f1">
+<title>My English Studio</title>
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#222923;--muted:#6b736d;--line:#e3e5df;--green:#275c45;--green2:#e8f1eb;--gold:#f5edda;--red:#a94442;--shadow:0 8px 26px #263c2a0b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;background:var(--green);color:white;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:var(--green2);color:var(--green)}.plain{background:transparent;color:var(--muted);border:1px solid var(--line)}.danger{background:#fbeceb;color:var(--red)}.small{padding:7px 10px;font-size:14px}
+header{padding:28px 18px 22px;background:#e9eee8;border-bottom:1px solid var(--line)}.headinner,main{max-width:1050px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-size:12px;font-weight:800}.headline{display:flex;align-items:center;justify-content:space-between;gap:20px}.headline h1{margin:5px 0;font-size:clamp(27px,5vw,39px);letter-spacing:-.04em}.headline p{margin:0;color:var(--muted)}.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px;color:var(--green);white-space:nowrap}
+nav{display:flex;gap:8px;overflow:auto;padding:15px 18px;max-width:1050px;margin:auto}nav button{white-space:nowrap}.tab{background:transparent;color:var(--muted)}.tab.active{background:var(--green);color:white}
+main{padding:0 18px 48px}.panel{display:none}.panel.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;min-width:0}.card h2,.card h3{margin:0 0 14px;letter-spacing:-.02em}.card h2{font-size:21px}.card h3{font-size:17px}.muted{color:var(--muted)}.hint{font-size:13px;color:var(--muted)}label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px;color:#49524b}input[type=text],input[type=number],textarea,select{width:100%;border:1px solid #d9ded7;background:#fff;border-radius:11px;padding:11px 12px;color:var(--ink);outline:none}textarea{resize:vertical;min-height:76px}input:focus,textarea:focus,select:focus{border-color:#71927d;box-shadow:0 0 0 3px #275c4512}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}.row .grow{flex:1}.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}.stat{padding:13px;border-radius:14px;background:#fff;border:1px solid var(--line)}.stat strong{display:block;font-size:23px}.stat span{font-size:12px;color:var(--muted)}.listtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.search{max-width:240px}.wordlist{display:grid;gap:10px}.worditem{border:1px solid var(--line);border-radius:14px;padding:13px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}.worditem input{margin-top:7px;accent-color:var(--green);width:17px;height:17px}.wordmain{min-width:0}.wordtitle{font-weight:800;font-size:17px;overflow-wrap:anywhere}.wordmeta{font-size:13px;color:var(--muted);margin-top:2px}.wordactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.wordactions button{padding:6px 9px;font-size:13px}.tag{display:inline-block;background:#f1f2ed;color:#626a62;border-radius:7px;padding:2px 7px;font-size:12px;margin-left:5px}.empty{padding:25px 10px;text-align:center;color:var(--muted);border:1px dashed #cfd5cd;border-radius:13px}.notice{padding:12px 14px;background:var(--gold);border-radius:12px;font-size:13px;color:#65562e}.definition{white-space:pre-wrap}.definition h3{margin-top:16px}.defblock{padding:13px;background:#f7f8f5;border-radius:12px;margin-top:10px}.defblock p{margin:6px 0}.dictation-stage{padding:20px;border-radius:15px;background:#f4f6f1;text-align:center}.bigicon{font-size:34px}.progress{height:7px;background:#e4e8e0;border-radius:99px;overflow:hidden;margin:12px 0}.progress div{height:100%;width:0;background:var(--green);transition:width .2s}.hidden{display:none!important}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.headline{align-items:flex-start;flex-direction:column;gap:10px}.card{padding:16px}.stats{gap:7px}.stat{padding:10px}.stat strong{font-size:20px}.fieldgrid{grid-template-columns:1fr}.search{max-width:none;width:100%}.listtop{align-items:stretch;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="headinner">
+  <div class="eyebrow">Your personal learning space</div>
+  <div class="headline"><div><h1>My English Studio <span aria-hidden="true">✦</span></h1><p>慢慢积累，反复聆听，把英语变成自己的。</p></div><span class="pill" id="voiceStatus">正在检查英式语音…</span></div>
+</div></header>
+<nav aria-label="主导航">
+  <button class="tab active" data-tab="library">我的词库</button>
+  <button class="tab" data-tab="dictation">听写练习</button>
+  <button class="tab" data-tab="settings">学习设置</button>
+</nav>
+<main>
+<section class="panel active" id="panel-library">
+  <div class="stats">
+    <div class="stat"><strong id="totalCount">0</strong><span>词库内容</span></div>
+    <div class="stat"><strong id="selectedCount">0</strong><span>已选听写</span></div>
+    <div class="stat"><strong id="todayCount">0</strong><span>今日新增</span></div>
+  </div>
+  <div class="layout">
+    <div>
+      <div class="card">
+        <h2 id="formTitle">添加学习内容</h2>
+        <p class="muted" style="margin-top:-8px">可以是单词、短语或完整句子。</p>
+        <form id="entryForm">
+          <input type="hidden" id="entryId">
+          <label for="term">英文内容 *</label><input id="term" type="text" placeholder="例如：meticulous / Could you give me a hand?" required maxlength="500">
+          <div class="fieldgrid"><div><label for="meaning">中文意思（可选）</label><input id="meaning" type="text" placeholder="例如：一丝不苟的"></div><div><label for="scene">使用场景（可选）</label><input id="scene" type="text" placeholder="例如：工作、日常对话"></div></div>
+          <label for="example">例句 / 补充说明（可选）</label><textarea id="example" placeholder="写下自己的例句、记忆方法或使用场景…"></textarea>
+          <div class="row" style="margin-top:14px"><button type="submit" id="saveEntry">保存到词库</button><button type="button" class="secondary" id="lookupBtn">查询释义</button><button type="button" class="plain hidden" id="cancelEdit">取消编辑</button></div>
+        </form>
+        <p class="hint">内容保存在当前浏览器设备中。清除浏览器数据可能会删除词库，请定期导出备份。</p>
+      </div>
+      <div class="card">
+        <div class="listtop"><h2 style="margin:0">我的词库</h2><input class="search" id="searchInput" type="text" placeholder="搜索单词或意思…"></div>
+        <div class="row" style="margin-bottom:12px"><button class="secondary small" id="selectAll">全选显示内容</button><button class="plain small" id="clearSelection">清除选择</button><button class="plain small" id="exportBtn">导出备份</button><button class="plain small" id="importBtn">导入备份</button><input id="importFile" type="file" accept=".json,application/json" class="hidden"></div>
+        <div id="wordList" class="wordlist"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h2>发音练习</h2><p class="muted" style="margin-top:-8px">输入或从词库选择内容，再听英式读法。</p>
+        <label for="speakText">要朗读的内容</label><textarea id="speakText" placeholder="Type a word or sentence here…">Good morning. How are you today?</textarea>
+        <div class="fieldgrid"><div><label for="speed">朗读速度</label><select id="speed"><option value="0.65">慢速 · 0.65×</option><option value="0.8">较慢 · 0.8×</option><option value="0.9" selected>自然偏慢 · 0.9×</option><option value="1">正常 · 1×</option><option value="1.1">稍快 · 1.1×</option></select></div><div><label for="voiceSelect">可用语音</label><select id="voiceSelect"><option value="">自动选择英国英语</option></select></div></div>
+        <div class="row" style="margin-top:14px"><button id="speakBtn">▶ 播放发音</button><button class="secondary" id="repeatBtn">再听一次</button><button class="plain" id="stopSpeakBtn">停止</button></div>
+        <p class="hint" id="speechHint">发音由你的浏览器和设备提供。不同设备的声音可能不同。</p>
+      </div>
+      <div class="card">
+        <div class="listtop"><h2 style="margin:0">词典小助手</h2><span class="tag">Wiktionary</span></div>
+        <p class="muted" style="margin-top:-5px">查询单词的英文释义、词性、音标和例句。完整句子可能查不到词条。</p>
+        <div id="dictionaryResult"><div class="empty">先在左边输入单词，再按「查询释义」。</div></div>
+        <p class="hint">词典数据来自 Wiktionary；中文释义与自定义场景可自行填写。联网查询只在你主动点击时进行。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="panel-dictation">
+  <div class="layout">
+    <div class="card">
+      <h2>准备听写</h2>
+      <p class="muted">回到「我的词库」，勾选想听写的词或句子。也可以在这里先查看已选数量。</p>
+      <div class="stats"><div class="stat"><strong id="dictSelectedCount">0</strong><span>已选内容</span></div><div class="stat"><strong id="dictRoundCount">1</strong><span>当前轮次</span></div><div class="stat"><strong id="dictDoneCount">0</strong><span>已完成题数</span></div></div>
+      <div class="fieldgrid">
+        <div><label for="interval">每题间隔（秒）</label><input id="interval" type="number" min="3" max="120" value="8"></div>
+        <div><label for="repeatTimes">每题朗读次数</label><select id="repeatTimes"><option value="1">1 次</option><option value="2" selected>2 次</option><option value="3">3 次</option></select></div>
+        <div><label for="pauseBefore">开始前倒数（秒）</label><input id="pauseBefore" type="number" min="0" max="30" value="3"></div>
+        <div><label for="dictSpeed">听写语速</label><select id="dictSpeed"><option value="0.65">慢速 · 0.65×</option><option value="0.8" selected>较慢 · 0.8×</option><option value="0.9">自然偏慢 · 0.9×</option><option value="1">正常 · 1×</option></select></div>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;margin-top:15px"><input type="checkbox" id="shuffle" checked style="width:17px;height:17px;accent-color:var(--green)"> 随机排序</label>
+      <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="hideAnswer" checked style="width:17px;height:17px;accent-color:var(--green)"> 听写期间隐藏答案</label>
+      <div class="row" style="margin-top:16px"><button id="startDictation">开始听写</button><button id="stopDictation" class="danger" disabled>结束练习</button></div>
+      <p class="hint">提示：浏览器需要保持在打开状态，手机锁屏或切换应用可能会暂停朗读。</p>
+    </div>
+    <div class="card">
+      <h2>听写进行中</h2>
+      <div class="dictation-stage">
+        <div class="bigicon" id="dictIcon">🎧</div>
+        <h3 id="dictStatus" style="margin:8px 0">准备好了吗？</h3>
+        <p id="dictMessage" class="muted">开始后先倒数，然后自动播放每个内容。</p>
+        <div class="progress"><div id="progressBar"></div></div>
+        <p id="dictProgress" class="hint">0 / 0 题</p>
+        <div class="row" style="justify-content:center;margin-top:12px"><button id="replayCurrent" class="secondary" disabled>再听当前题</button><button id="showAnswer" class="plain" disabled>显示答案</button><button id="nextQuestion" class="plain" disabled>下一题</button></div>
+        <div id="answerBox" class="defblock hidden" style="text-align:left"><strong>本题答案</strong><p id="answerText"></p></div>
+      </div>
+      <div class="defblock"><strong>听写小建议</strong><p class="muted">第一遍听整体，第二遍注意词尾、复数、时态和连读。听完后可以回到词库再次播放。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="panel-settings">
+  <div class="card" style="max-width:720px">
+    <h2>学习设置与数据</h2>
+    <p>这是一个静态网站，不需要注册账号。词库数据只保存在当前浏览器的本地存储中。</p>
+    <div class="notice">重要：GitHub Pages 负责发布网页，不会自动同步你的个人词库到其他设备。更换浏览器或手机前，请使用「导出备份」，在新设备打开网站后再「导入备份」。</div>
+    <h3 style="margin-top:20px">建议的学习流程</h3>
+    <ol><li>每天添加 5–10 个单词或句子。</li><li>听英式发音，先尝试听出重音和词尾。</li><li>为重要单词补充中文意思和自己的例句。</li><li>勾选今天想练的内容，开始听写。</li><li>每周导出一次 JSON 备份。</li></ol>
+    <h3>语音与隐私</h3><p class="muted">语音合成通常由浏览器或设备完成。查询词典时，输入的单词会发送给公开词典 API；本网页本身没有账号系统，也不会把词库上传到你的 GitHub 仓库。</p>
+    <div class="row"><button class="secondary" id="settingsExport">导出词库备份</button><button class="danger" id="deleteAll">删除全部词库</button></div>
+  </div>
+</section>
+<div class="footer">My English Studio · A small step every day.</div>
+</main>
+<script>
+(() => {
+const STORAGE_KEY = 'myEnglishStudio.entries.v1';
+let entries = loadEntries(), voices = [], selectedVoiceName = '', lastSpoken = '', session = [], sessionIndex = 0, completed = 0, round = 1, active = false, timer = null, currentAnswer = '';
+const $ = id => document.getElementById(id);
+function loadEntries(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(x)?x:[]}catch{return []}}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(entries))}catch{alert('无法保存：浏览器存储可能已满。请先导出备份。')}render()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function notifyVoice(){voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];const sel=$('voiceSelect'),old=selectedVoiceName||sel.value;sel.innerHTML='<option value="">自动选择英国英语</option>';const english=voices.filter(v=>/^en(-|_)/i.test(v.lang));english.sort((a,b)=>Number(!/^en-GB/i.test(a.lang))-Number(!/^en-GB/i.test(b.lang)));english.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=`${v.name} · ${v.lang}`;sel.appendChild(o)});if(old&&[...sel.options].some(o=>o.value===old))sel.value=old;selectedVoiceName=sel.value;const british=voices.filter(v=>/^en-GB/i.test(v.lang));$('voiceStatus').textContent=british.length?'英式语音可用':'将尝试英式语音';$('speechHint').textContent=british.length?'已发现英国英语语音。你也可以在下方选择其他可用英语声音。':'当前设备可能没有安装英国英语语音；网站会尝试请求 en-GB，实际发音取决于设备。'}
+function chooseVoice(){if(selectedVoiceName){const v=voices.find(v=>v.name===selectedVoiceName);if(v)return v}return voices.find(v=>/^en-GB/i.test(v.lang))||voices.find(v=>/^en_/i.test(v.lang))||voices.find(v=>/^en-/i.test(v.lang))||null}
+function speak(text,rate=Number($('speed').value),onend){if(!text?.trim()){alert('请先输入要朗读的内容。');return}if(!('speechSynthesis'in window)){alert('当前浏览器不支持语音朗读，请使用较新的 Chrome 或 Edge。');return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.trim());u.lang='en-GB';u.rate=rate;const v=chooseVoice();if(v){u.voice=v;u.lang=v.lang}u.onend=()=>{if(onend)onend()};u.onerror=e=>{if(e.error!=='canceled'&&e.error!=='interrupted')$('speechHint').textContent='语音播放遇到问题，请检查设备语音设置后重试。';if(onend)onend()};lastSpoken=text;window.speechSynthesis.speak(u)}
+function render(){const q=$('searchInput').value.trim().toLowerCase();const shown=entries.filter(e=>[e.term,e.meaning,e.scene,e.example].some(s=>(s||'').toLowerCase().includes(q)));$('totalCount').textContent=entries.length;$('selectedCount').textContent=entries.filter(e=>e.selected).length;$('dictSelectedCount').textContent=entries.filter(e=>e.selected).length;$('todayCount').textContent=entries.filter(e=>new Date(e.createdAt||0).toDateString()===new Date().toDateString()).length;
+$('wordList').innerHTML=shown.length?shown.map(e=>`<div class="worditem"><input type="checkbox" aria-label="选择听写 ${esc(e.term)}" data-select="${e.id}" ${e.selected?'checked':''}><div class="wordmain"><div class="wordtitle">${esc(e.term)}${e.scene?`<span class="tag">${esc(e.scene)}</span>`:''}</div><div class="wordmeta">${esc(e.meaning||'尚未填写中文意思')}${e.example?` · ${esc(e.example)}`:''}</div><div class="wordactions"><button class="secondary" data-speak="${e.id}">▶ 听发音</button><button class="plain" data-fill="${e.id}">带入练习</button><button class="plain" data-edit="${e.id}">编辑</button><button class="plain" data-lookup="${e.id}">查词典</button><button class="plain" data-delete="${e.id}">删除</button></div></div></div>`).join(''):'<div class="empty">还没有内容，先添加你的第一个单词或句子吧。</div>';
+$('wordList').querySelectorAll('[data-select]').forEach(el=>el.addEventListener('change',()=>{const e=entries.find(x=>x.id===el.dataset.select);if(e)e.selected=el.checked;save()}));
+$('wordList').querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',()=>{const e=entries.find(x=>x.id===el.dataset.speak);if(e)speak(e.term)}));
+$('wordList').querySelectorAll('[data-fill]').forEach(el=>el.addEventListener('click',()=>{const e=entries.find(x=>x.id===el.dataset.fill);if(e){$('speakText').value=e.term;window.scrollTo({top:0,behavior:'smooth'})}}));
+$('wordList').querySelectorAll('[data-edit]').forEach(el=>el.addEventListener('click',()=>editEntry(el.dataset.edit)));
+$('wordList').querySelectorAll('[data-delete]').forEach(el=>el.addEventListener('click',()=>{const e=entries.find(x=>x.id===el.dataset.delete);if(e&&confirm(`确定删除「${e.term}」吗？`)){entries=entries.filter(x=>x.id!==e.id);save()}}));
+$('wordList').querySelectorAll('[data-lookup]').forEach(el=>el.addEventListener('click',()=>{const e=entries.find(x=>x.id===el.dataset.lookup);if(e){$('term').value=e.term;lookupWord(e.term);switchTab('library')}}));
+}
+function resetForm(){$('entryForm').reset();$('entryId').value='';$('formTitle').textContent='添加学习内容';$('saveEntry').textContent='保存到词库';$('cancelEdit').classList.add('hidden')}
+function editEntry(entryId){const e=entries.find(x=>x.id===entryId);if(!e)return;$('entryId').value=e.id;$('term').value=e.term;$('meaning').value=e.meaning||'';$('scene').value=e.scene||'';$('example').value=e.example||'';$('formTitle').textContent='编辑学习内容';$('saveEntry').textContent='保存修改';$('cancelEdit').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+$('entryForm').addEventListener('submit',ev=>{ev.preventDefault();const term=$('term').value.trim();if(!term)return;const old=entries.find(e=>e.id===$('entryId').value);const obj={id:old?.id||id(),term,meaning:$('meaning').value.trim(),scene:$('scene').value.trim(),example:$('example').value.trim(),selected:old?.selected||false,createdAt:old?.createdAt||Date.now()};if(old)entries=entries.map(e=>e.id===old.id?obj:e);else entries.unshift(obj);save();resetForm()});
+$('cancelEdit').addEventListener('click',resetForm);$('searchInput').addEventListener('input',render);
+$('selectAll').addEventListener('click',()=>{const q=$('searchInput').value.trim().toLowerCase();entries.forEach(e=>{if([e.term,e.meaning,e.scene,e.example].some(s=>(s||'').toLowerCase().includes(q)))e.selected=true});save()});
+$('clearSelection').addEventListener('click',()=>{entries.forEach(e=>e.selected=false);save()});
+function switchTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tab));if(tab==='dictation')updateDictStats();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+$('speakBtn').addEventListener('click',()=>speak($('speakText').value));$('repeatBtn').addEventListener('click',()=>speak(lastSpoken||$('speakText').value));$('stopSpeakBtn').addEventListener('click',()=>window.speechSynthesis?.cancel());$('voiceSelect').addEventListener('change',()=>selectedVoiceName=$('voiceSelect').value);
+function plainWikiText(value){
+ const raw=String(value??'');
+ // Wiktionary may return HTML fragments inside definitions and examples.
+ // Extract readable text first, then render it safely as plain text.
+ const doc=new DOMParser().parseFromString(raw,'text/html');
+ return (doc.body.textContent||'').replace(/\\s+/g,' ').trim();
+}
+async function lookupWord(raw){
+ const word=(raw||$('term').value).trim();
+ if(!word){alert('请先输入英文单词或短语。');return}
+ const box=$('dictionaryResult');
+ box.innerHTML='<div class="empty">正在查询 Wiktionary…</div>';
+ const wikiUrl='https://en.wiktionary.org/wiki/'+encodeURIComponent(word.replace(/ /g,'_'));
+ try{
+  // Wikimedia's REST API is intended for browser-readable public data; the old dictionary API may reject cross-origin fetches.
+  const apiUrl='https://en.wiktionary.org/api/rest_v1/page/definition/'+encodeURIComponent(word.replace(/ /g,'_'));
+  const res=await fetch(apiUrl,{signal:AbortSignal.timeout(12000)});
+  if(res.status===404)throw new Error('Wiktionary 没有找到这个词条。你可以尝试单个单词，或打开 Wiktionary 查看短语。');
+  if(!res.ok)throw new Error('词典服务暂时无法使用（HTTP '+res.status+'）。请稍后再试。');
+  const data=await res.json();
+  const entries=data.en||data.English||[];
+  let html='';
+  entries.forEach(item=>{
+   html+=`<div class="defblock"><h3>${esc(word)} ${item.partOfSpeech?`<span class="tag">${esc(item.partOfSpeech)}</span>`:''}</h3>`;
+   (item.definitions||[]).slice(0,8).forEach(d=>{
+    const definition=plainWikiText(typeof d==='string'?d:(d.definition||d.gloss||''));
+    const ex=plainWikiText((d.parsedExamples||[]).map(x=>typeof x==='string'?x:(x.example||x.text||'')).filter(Boolean)[0] || (d.examples||[]).map(x=>typeof x==='string'?x:(x.example||x.text||'')).filter(Boolean)[0] || '');
+    if(definition)html+=`<p>• ${esc(definition)}${ex?`<br><span class="muted">例句：${esc(ex)}</span>`:''}</p>`;
+   });
+   html+='</div>';
+  });
+  if(!html)html=`<div class="empty">这个词条暂时没有可显示的英文释义。<br><br><a href="${wikiUrl}" target="_blank" rel="noopener noreferrer">在 Wiktionary 打开词条 ↗</a></div>`;
+  else html+=`<p class="hint"><a href="${wikiUrl}" target="_blank" rel="noopener noreferrer">查看完整词条 ↗</a></p>`;
+  box.innerHTML=html;
+ }catch(err){
+  const message=err.name==='TimeoutError'?'查询超时，可能是网络或词典服务暂时没有响应。':(err.name==='TypeError'?'浏览器无法读取词典数据，可能是网络或跨域连接问题。':(err.message||'查询失败。'));
+  box.innerHTML=`<div class="empty">${esc(message)}<br><br><a href="${wikiUrl}" target="_blank" rel="noopener noreferrer">直接在 Wiktionary 查看这个词 ↗</a><br><br>你仍然可以在「中文意思」「使用场景」「例句」栏位手动填写。</div>`;
+ }
+}
+$('lookupBtn').addEventListener('click',()=>lookupWord());
+function updateDictStats(){$('dictSelectedCount').textContent=entries.filter(e=>e.selected).length;$('dictDoneCount').textContent=completed;$('dictRoundCount').textContent=round}
+function stopSession(message='练习已结束。'){active=false;if(timer)clearTimeout(timer);timer=null;if('speechSynthesis'in window)window.speechSynthesis.cancel();$('stopDictation').disabled=true;$('startDictation').disabled=false;$('replayCurrent').disabled=true;$('showAnswer').disabled=true;$('nextQuestion').disabled=true;$('dictStatus').textContent=message;$('dictIcon').textContent='🎧';$('dictMessage').textContent='可以调整设置后再次开始。'}
+function updateProgress(){$('dictProgress').textContent=`${Math.min(sessionIndex+1,session.length)} / ${session.length} 题`;$('progressBar').style.width=(session.length?Math.min(100,sessionIndex/session.length*100):0)+'%';updateDictStats()}
+function revealAnswer(){if(!currentAnswer)return;$('answerText').textContent=currentAnswer;$('answerBox').classList.remove('hidden')}
+function playCurrent(){if(!active||sessionIndex>=session.length){if(active)stopSession('全部完成！做得很好。');return}const e=session[sessionIndex];currentAnswer=e.term;$('answerBox').classList.add('hidden');$('dictStatus').textContent=`第 ${sessionIndex+1} 题`;$('dictIcon').textContent='🔊';$('dictMessage').textContent='请认真听，并写下你听到的内容。';updateProgress();$('replayCurrent').disabled=false;$('showAnswer').disabled=false;$('nextQuestion').disabled=false;
+const n=Number($('repeatTimes').value),rate=Number($('dictSpeed').value);let count=0;const say=()=>{if(!active)return;if(count>=n){$('dictIcon').textContent='✍️';$('dictMessage').textContent='请写下听到的内容。';timer=setTimeout(()=>{if(active){sessionIndex++;completed++;playCurrent()}},Math.max(3,Number($('interval').value)||8)*1000);return}count++;speak(e.term,rate,()=>{if(active){timer=setTimeout(say,650)}})};say()}
+$('startDictation').addEventListener('click',()=>{const picked=entries.filter(e=>e.selected);if(!picked.length){alert('请先回到「我的词库」，勾选至少一个想听写的单词或句子。');switchTab('library');return}session=picked.slice();if($('shuffle').checked)session.sort(()=>Math.random()-.5);sessionIndex=0;completed=0;round=1;active=true;$('startDictation').disabled=true;$('stopDictation').disabled=false;$('dictMessage').textContent='请准备好纸笔，或打开你的笔记。';$('dictStatus').textContent='即将开始';let countdown=Math.max(0,Math.min(30,Number($('pauseBefore').value)||0));$('dictIcon').textContent='⏳';const tick=()=>{if(!active)return;if(countdown<=0){playCurrent();return}$('dictStatus').textContent=`${countdown} 秒后开始`;$('dictProgress').textContent=`共 ${session.length} 题`;countdown--;timer=setTimeout(tick,1000)};tick()});
+$('stopDictation').addEventListener('click',()=>stopSession());
+$('replayCurrent').addEventListener('click',()=>{if(!active||!session[sessionIndex])return;speak(session[sessionIndex].term,Number($('dictSpeed').value))});
+$('showAnswer').addEventListener('click',revealAnswer);
+$('nextQuestion').addEventListener('click',()=>{if(!active)return;if(timer)clearTimeout(timer);window.speechSynthesis?.cancel();sessionIndex++;completed++;playCurrent()});
+function exportData(){const blob=new Blob([JSON.stringify({app:'My English Studio',version:1,exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='my-english-studio-backup.json';a.click();URL.revokeObjectURL(url)}
+$('exportBtn').addEventListener('click',exportData);$('settingsExport').addEventListener('click',exportData);$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async ev=>{const f=ev.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());const incoming=Array.isArray(data)?data:data.entries;if(!Array.isArray(incoming))throw new Error('备份格式不正确');if(!confirm(`将导入 ${incoming.length} 条内容。相同 ID 的内容会被更新，是否继续？`))return;const map=new Map(entries.map(e=>[e.id,e]));incoming.forEach((e,i)=>{if(e&&typeof e.term==='string'){const clean={id:typeof e.id==='string'?e.id:id(),term:e.term.slice(0,500),meaning:String(e.meaning||''),scene:String(e.scene||''),example:String(e.example||''),selected:!!e.selected,createdAt:Number(e.createdAt)||Date.now()};map.set(clean.id,clean)}});entries=[...map.values()];save();alert('导入完成。')}catch(err){alert(err.message||'无法读取备份文件。')}finally{ev.target.value=''}});
+$('deleteAll').addEventListener('click',()=>{if(confirm('确定删除本浏览器中保存的全部词库吗？建议先导出备份。')){entries=[];save();resetForm()}});
+$('dictSpeed').addEventListener('change',()=>{});window.speechSynthesis?.addEventListener?.('voiceschanged',notifyVoice);
+if('speechSynthesis'in window)notifyVoice();else{$('voiceStatus').textContent='浏览器不支持语音';$('speechHint').textContent='请使用支持 SpeechSynthesis 的现代浏览器。'}
+render();
+})();
+</script>
+</body>
+</html>
